@@ -54,6 +54,8 @@ SELECT next_val('spec', 'id');
 ```
 
 Ожидаемый результат: **2**.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d370e401-fde0-484a-9978-e80a76f036b8" />
+
 
 ### Шаг 5. Содержимое спец. таблицы
 
@@ -62,6 +64,7 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 2)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8ccf2060-bde5-45e6-9797-4e2bc4e5ad6e" />
 
 ### Шаг 6. Повторный вызов для ('spec', 'id')
 
@@ -70,6 +73,7 @@ SELECT next_val('spec', 'id');
 ```
 
 Ожидаемый результат: **3**.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2e11e0cd-49c6-4fe4-b7c0-cb664de3105a" />
 
 ### Шаг 7. Содержимое спец. таблицы
 
@@ -78,6 +82,7 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 3)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a6df4a1a-d7a9-4b7f-8b9b-1db2e4fc2839" />
 
 ### Шаг 8. Создание таблицы test
 
@@ -99,6 +104,8 @@ SELECT next_val('test', 'id');
 
 Ожидаемый результат: **11**. Записи для `test.id` нет, поэтому находится максимум 10 и вставляется 11. Рекурсивный вызов увеличивает `spec.id` до 4, и это становится `id` новой строки.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a9ee8eae-61d7-4cb1-a1dd-fb95b1c2d8d7" />
+
 ### Шаг 11. Содержимое спец. таблицы
 
 ```sql
@@ -106,6 +113,8 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 4)`, `(4, test, id, 11)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1bc08435-b90f-48b6-8b76-e46a6a7ea5e1" />
+
 
 ### Шаг 12. Повторный вызов для ('test', 'id')
 
@@ -114,6 +123,8 @@ SELECT next_val('test', 'id');
 ```
 
 Ожидаемый результат: **12**.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/65be78cd-7739-4ec4-80e3-0afe7aa2e13e" />
+
 
 ### Шаг 13. Содержимое спец. таблицы
 
@@ -122,6 +133,8 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 4)`, `(4, test, id, 12)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bc76f4c5-bd21-4139-b96f-753d0cdf70db" />
+
 
 ### Шаг 14. Создание таблицы test2
 
@@ -136,6 +149,7 @@ SELECT next_val('test2', 'num_value1');
 ```
 
 Ожидаемый результат: **1** (таблица пустая).
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b402b62a-aef6-4927-852e-0903f640d8bb" />
 
 ### Шаг 16. Содержимое спец. таблицы
 
@@ -144,6 +158,7 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 5)`, `(4, test, id, 12)`, `(5, test2, num_value1, 1)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9be402e-1ce9-446c-baa9-7b003fa95d66" />
 
 ### Шаг 17. Повторный вызов для ('test2', 'num_value1')
 
@@ -152,6 +167,8 @@ SELECT next_val('test2', 'num_value1');
 ```
 
 Ожидаемый результат: **2**.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26556d84-36e7-4ced-837e-4a624868f2d0" />
+
 
 ### Шаг 18. Содержимое спец. таблицы
 
@@ -160,6 +177,8 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 5)`, `(4, test, id, 12)`, `(5, test2, num_value1, 2)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/48e11889-a999-48eb-bac7-a82a17ced98c" />
+
 
 ### Шаг 19. Добавление записи (2, 13) в test2
 
@@ -174,6 +193,7 @@ SELECT next_val('test2', 'num_value2');
 ```
 
 Ожидаемый результат: **14** (максимум 13, плюс 1).
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d6ab8fc8-67a4-433e-bd5c-b81fa2258539" />
 
 ### Шаг 21. Содержимое спец. таблицы
 
@@ -182,6 +202,7 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 6)`, `(4, test, id, 12)`, `(5, test2, num_value1, 2)`, `(6, test2, num_value2, 14)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/75d4aeb2-31b8-4eba-ba8b-66b5cc83ede5" />
 
 ### Шаг 22. Пять вызовов для ('test2', 'num_value1')
 
@@ -190,6 +211,8 @@ SELECT next_val('test2', 'num_value1') FROM generate_series(1, 5);
 ```
 
 Ожидаемый результат: 3, 4, 5, 6, 7.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9af4b565-cc2b-49cb-ba3c-cc599a9ca76b" />
+
 
 ### Шаг 23. Содержимое спец. таблицы
 
@@ -198,6 +221,8 @@ SELECT * FROM spec ORDER BY id;
 ```
 
 Ожидаемый результат: `(1, spec, id, 6)`, `(4, test, id, 12)`, `(5, test2, num_value1, 7)`, `(6, test2, num_value2, 14)`.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/028da159-def3-473e-8dad-db2fe4d130a8" />
+
 
 ### Шаг 24. Удаление ХП
 
